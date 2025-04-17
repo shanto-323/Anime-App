@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -10,17 +13,23 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    val local = Properties().apply {
+        val localFile = rootProject.file("local.properties")
+        if (localFile.exists()) {
+            load(FileInputStream(localFile))
+        }
+    }
     defaultConfig {
         minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-        buildConfigField("String", "SUPABASE_URL", "\"${project.properties["SUPABASE_URL"]}\"")
+        buildConfigField("String", "SUPABASE_URL", "\"${local["SUPABASE_URL"]}\"")
         buildConfigField(
             "String",
             "SUPABASE_API_KEY",
-            "\"${project.properties["SUPABASE_API_KEY"]}\""
+            "\"${local["SUPABASE_API_KEY"]}\""
         )
     }
 
