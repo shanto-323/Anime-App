@@ -14,4 +14,3 @@
 .cxx
 local.properties
 
-auth/main/java/com/example/auth/di/NetworkModule.kt

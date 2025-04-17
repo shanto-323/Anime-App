@@ -7,11 +7,21 @@ android {
     namespace = "com.example.auth"
     compileSdk = 35
 
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "SUPABASE_URL", "\"${project.properties["SUPABASE_URL"]}\"")
+        buildConfigField(
+            "String",
+            "SUPABASE_API_KEY",
+            "\"${project.properties["SUPABASE_API_KEY"]}\""
+        )
     }
 
     buildTypes {
