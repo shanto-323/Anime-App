@@ -6,15 +6,15 @@ import com.example.domain.repository.AuthRepository
 class AuthUseCase(
     private val repository: AuthRepository
 ) {
-    suspend fun loginWithEmailAndPassword(email: String, password: String): Response {
+    suspend fun loginWithEmailAndPassword(email: String, password: String): Response<String> {
         return repository.loginWithEmailAndPassword(email, password)
     }
 
-    suspend fun signUpWithEmailAndPassword(email: String, password: String): Response {
+    suspend fun signUpWithEmailAndPassword(email: String, password: String): Response<String> {
         return repository.registerWithEmailAndPassword(email, password)
     }
 
-    suspend fun logout(): Response {
+    suspend fun logout(): Response<String> {
         return repository.logout()
     }
 

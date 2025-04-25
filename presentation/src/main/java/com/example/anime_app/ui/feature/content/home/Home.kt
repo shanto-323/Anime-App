@@ -47,6 +47,7 @@ import com.example.anime_app.navigation.AnimeScreen
 import com.example.anime_app.navigation.Content
 import com.example.anime_app.navigation.FavoriteScreen
 import com.example.anime_app.navigation.ProfileScreen
+import com.example.anime_app.ui.feature.content.anime.AnimeScreen
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
@@ -73,14 +74,15 @@ fun Home(
                 startDestination = AnimeScreen,
             ) {
                 composable<AnimeScreen> {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Green),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = "Anime Screen")
-                    }
+//                    Box(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .background(Color.Green),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(text = "Anime Screen")
+//                    }
+                    AnimeScreen()
                 }
                 composable<FavoriteScreen> {
                     Box(
@@ -111,7 +113,7 @@ fun Home(
 
 @Composable
 fun ProfileScreen(
-    response: UiResponse,
+    response: UiResponse<*>,
     context: Context,
     onEvent: (HomeEvent) -> Unit,
 ) {
@@ -141,7 +143,7 @@ fun ProfileScreen(
                 Log.d("TAG2", response.msg)
             }
 
-            UiResponse.Success -> {
+            is UiResponse.Success -> {
                 Toast.makeText(context, "Signed Up Successfully", Toast.LENGTH_SHORT).show()
             }
 

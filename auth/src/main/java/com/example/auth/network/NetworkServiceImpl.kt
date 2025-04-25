@@ -25,34 +25,34 @@ class NetworkServiceImpl(
         }
     }
 
-    override suspend fun loginWithEmailAndPassword(email: String, password: String): Response {
+    override suspend fun loginWithEmailAndPassword(email: String, password: String): Response<String> {
         return try {
             client.auth.signInWith(Email) {
                 this.email = email
                 this.password = password
             }
-            Response.Success
+            Response.Success("Logged in successfully")
         } catch (e: Exception) {
             Response.Error(e.message.toString())
         }
     }
 
-    override suspend fun registerWithEmailAndPassword(email: String, password: String): Response {
+    override suspend fun registerWithEmailAndPassword(email: String, password: String): Response<String> {
         return try {
             client.auth.signUpWith(Email) {
                 this.email = email
                 this.password = password
             }
-            Response.Success
+            Response.Success("Signed up successfully")
         } catch (e: Exception) {
             Response.Error(e.message.toString())
         }
     }
 
-    override suspend fun logout(): Response {
+    override suspend fun logout(): Response<String> {
         return try {
             client.auth.signOut()
-            Response.Success
+            Response.Success("Logged out successfully")
         } catch (e: Exception) {
             Response.Error(e.message.toString())
         }

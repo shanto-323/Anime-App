@@ -12,15 +12,15 @@ class AuthRepositoryImpl(
 ) : AuthRepository {
     override val currentUser: AuthUser? = networkService.currentUser
 
-    override suspend fun loginWithEmailAndPassword(email: String, password: String): Response {
+    override suspend fun loginWithEmailAndPassword(email: String, password: String): Response<String> {
         return networkService.loginWithEmailAndPassword(email, password)
     }
 
-    override suspend fun registerWithEmailAndPassword(email: String, password: String): Response {
+    override suspend fun registerWithEmailAndPassword(email: String, password: String): Response<String> {
         return networkService.registerWithEmailAndPassword(email, password)
     }
 
-    override suspend fun logout(): Response {
+    override suspend fun logout(): Response<String> {
         return networkService.logout()
     }
 

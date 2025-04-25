@@ -1,6 +1,6 @@
 package com.example.domain.model
 
-sealed class Response {
-    data object Success : Response()
-    data class Error(val msg: String) : Response()
+sealed class Response<out T> {
+    data class Success<out T>(val data : T) : Response<T>()
+    data class Error(val msg: String) : Response<Nothing>()
 }

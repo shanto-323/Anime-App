@@ -56,7 +56,7 @@ fun Login(
                 Log.d("TAG2", response.msg)
             }
 
-            UiResponse.Success -> {
+            is UiResponse.Success -> {
                 Toast.makeText(context, "Logged In Successfully", Toast.LENGTH_SHORT).show()
             }
 

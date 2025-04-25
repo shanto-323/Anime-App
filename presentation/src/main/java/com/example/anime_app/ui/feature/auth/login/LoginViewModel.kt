@@ -16,7 +16,7 @@ class LoginViewModel(
     private val _state = MutableStateFlow(LoginState())
     val state = _state.asStateFlow()
 
-    private val _response = MutableStateFlow<UiResponse>(UiResponse.Nothing)
+    private val _response = MutableStateFlow<UiResponse<*>>(UiResponse.Nothing)
     val response = _response.asStateFlow()
 
     fun logInEvent(event: LoginEvent) {
@@ -51,7 +51,9 @@ class LoginViewModel(
                     _response.value = UiResponse.Nothing
                 }
 
-                Response.Success -> _response.value = UiResponse.Success
+                is Response.Success<*> -> {
+                    _response.value = UiResponse.Success(auth.data ?: "")
+                }
             }
         }
 

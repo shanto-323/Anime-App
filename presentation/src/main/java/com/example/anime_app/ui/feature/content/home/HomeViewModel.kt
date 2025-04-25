@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val authUseCase: AuthUseCase
 ) : ViewModel() {
-    private val _response = MutableStateFlow<UiResponse>(UiResponse.Nothing)
+    private val _response = MutableStateFlow<UiResponse<*>>(UiResponse.Nothing)
     val response = _response.asStateFlow()
 
     fun onEvent(event: HomeEvent) {
@@ -33,7 +33,9 @@ class HomeViewModel(
                     _response.value = UiResponse.Nothing
                 }
 
-                Response.Success -> _response.value = UiResponse.Success
+                is Response.Success<*> -> {
+                    _response.value = UiResponse.Success(auth.data ?: "")
+                }
             }
         }
     }

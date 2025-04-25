@@ -5,9 +5,9 @@ import com.example.domain.model.Response
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun loginWithEmailAndPassword(email: String, password: String): Response
-    suspend fun registerWithEmailAndPassword(email: String, password: String): Response
-    suspend fun logout(): Response
+    suspend fun loginWithEmailAndPassword(email: String, password: String): Response<String>
+    suspend fun registerWithEmailAndPassword(email: String, password: String): Response<String>
+    suspend fun logout(): Response<String>
 
     val currentUser: AuthUser?
     fun getAuthState(): Flow<Boolean>
